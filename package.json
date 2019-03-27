@@ -1,6 +1,6 @@
 {
   "name": "react-schema-editor",
-  "version": "0.0.0-development",
+  "version": "0.1.0",
   "description": "react schema editor Component",
   "main": "build/index.cjs.js",
   "module": "build/index.esm.js",
@@ -25,15 +25,11 @@
   },
   "author": "candy.zhengxq@gmail.com",
   "dependencies": {
-    "babel-preset-es2017": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
     "codemirror": "^5.45.0",
     "json5": "^2.1.0",
-    "less-loader": "^4.1.0",
     "lodash.set": "^4.3.2",
     "prop-types": "^15.6.1",
-    "react-codemirror2": "^5.1.0",
-    "rollup-plugin-less": "^1.1.2"
+    "react-codemirror2": "^5.1.0"
   },
   "peerDependencies": {
     "react": "^16.8.2",
@@ -41,6 +37,10 @@
     "antd": "^3.13.0"
   },
   "devDependencies": {
+    "rollup-plugin-less": "^1.1.2",
+    "less-loader": "^4.1.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-angular": "^7.0.1",
     "@commitlint/prompt": "^7.0.0",
