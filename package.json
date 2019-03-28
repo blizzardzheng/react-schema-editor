@@ -37,6 +37,11 @@
     "react-dom": "^16.8.2",
     "antd": "^3.13.0"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-angular": "^7.0.1",
