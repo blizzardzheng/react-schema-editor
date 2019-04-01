@@ -298,6 +298,7 @@ class SchemaEditor extends React.Component {
   }
 
   render() {
+    const { useRequired } = this.props;
     const { jsonStr, schema, enumsModal, leftRowCount, hightLightLine } = this.state;
     const rows = [];
     this.renderTable(rows, schema.properties, 'data');
@@ -314,6 +315,7 @@ class SchemaEditor extends React.Component {
                   <span className="format-action" onClick={this.formatJSON}> 格式化 </span>
                 </th>
                 <th width="10%" style={{ textAlign: 'center' }}>字段</th>
+                {useRequired && <th width="8%" style={{ textAlign: 'center' }}>必填</th>}
                 <th width="10%" style={{ textAlign: 'center' }}>意义</th>
                 <th width="20%" style={{ textAlign: 'center' }}>值规则</th>
                 <th width="20%" style={{ textAlign: 'center' }}>备注</th>
@@ -326,7 +328,7 @@ class SchemaEditor extends React.Component {
                     <CodeMirror
                       value={jsonStr}
                       options={CodeMirrorConfig}
-                      editorDidMount={ editor => { this.instance = editor; }}
+                      editorDidMount={editor => { this.instance = editor; }}
                       onBeforeChange={(editor, data, value) => {
                         this.setState({ jsonStr: value });
                       }}
@@ -337,68 +339,69 @@ class SchemaEditor extends React.Component {
                     />
                   </div>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td />
+                <td />
+                <td />
               </tr>
               {
                 rows.map((item, idx) => (
                   <tr key={idx} className={hightLightLine === idx + 1 ? 'highlight-line' : ''}>
                     {
                       item.prop ? <td className="key-style">
-                          <Tooltip placement="topLeft" title={item.path}>
-                            <span>{item.prop}</span>
-                          </Tooltip>
-                      </td> : <td></td>
+                        <Tooltip placement="topLeft" title={item.path}>
+                          <span>{item.prop}</span>
+                        </Tooltip>
+                      </td> : <td />
                     }
-                    {
-                      item.type ? <td>
-                        <input className="re-input" type="text" value={item.title} data-line={idx + 1} onFocus={this.handleSyncTableHightlight} onChange={e => { this.blurFx(item, e.target.value, 'title'); }} />
-                      </td> : <td></td>
-                    }
-                    {/* {item.type ? <td className="required-style">
+                    {useRequired && item.type ? <td>
                       {
-                        <Select 
-                          placeholder="是否必填" 
-                          defaultValue={!!item.required} 
-                          value={item.required} 
+                        <Select
+                          style={{ width: '100%' }}
+                          placeholder="是否必填"
+                          defaultValue={!!item.required}
+                          value={item.required}
                           onChange={e => { this.blurFx(item, e, 'required'); }}
                         >
-                          <Select.Option key="true" value={true}>是</Select.Option>
+                          <Select.Option key="true" value>是</Select.Option>
                           <Select.Option key="false" value={false}>否</Select.Option>
                         </Select>
                       }
-                    </td> : <td></td>} */}
+                    </td> : <td />}
+                    {
+                      item.type ? <td>
+                        <input className="re-input" type="text" value={item.title} data-line={idx + 1} onFocus={this.handleSyncTableHightlight} onChange={e => { this.blurFx(item, e.target.value, 'title'); }} />
+                      </td> : <td />
+                    }
                     {
                       item.type === 'string' || item.type === 'number' || item.type === 'boolean' ?
-                      <td className="enum">
-                        {
-                          <div className="enum-select">
-                            <Tooltip title={<div>{(item.enum || []).map(attr => <div key={attr.value}>{`${attr.value} ${attr.remark ? ': ' + attr.remark : ''}`}</div>)}</div>}>
-                              {
+                        <td className="enum">
+                          {
+                            <div className="enum-select">
+                              <Tooltip title={<div>{(item.enum || []).map(attr => <div key={attr.value}>{`${attr.value} ${attr.remark ? ': ' + attr.remark : ''}`}</div>)}</div>}>
+                                {
                                 (item.enum || []).map((attr, i) => <span className="enum-value" key={i}><b>{attr.value} </b> {attr.remark ? `(${attr.remark})` : ''}</span>)
                               }
-                            </Tooltip>
-                            <span className="edit-icon" onClick={() => { this.enumFx(item.path, item.enum); }}>
-                              <Icon type="edit" />
-                            </span>
-                          </div>
+                              </Tooltip>
+                              <span className="edit-icon" onClick={() => { this.enumFx(item.path, item.enum); }}>
+                                <Icon type="edit" />
+                              </span>
+                            </div>
                         }
-                      </td> :
-                      <td></td>
+                        </td> :
+                        <td />
                     }
                     {
                       item.type ? <td>
                         <input className="re-input" type="text" value={item.remark} data-line={idx + 1} onFocus={this.handleSyncTableHightlight} onChange={e => { this.blurFx(item, e.target.value, 'remark'); }} />
-                      </td> : <td></td>
+                      </td> : <td />
                     }
                   </tr>
                 ))
               }
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td />
+                <td />
+                <td />
               </tr>
             </tbody>
           </table>
