@@ -1,6 +1,6 @@
 {
   "name": "react-schema-editor",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "react schema editor Component",
   "main": "build/index.cjs.js",
   "module": "build/index.esm.js",
