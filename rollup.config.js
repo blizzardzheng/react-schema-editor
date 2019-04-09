@@ -34,7 +34,7 @@ const config = {
   ],
   plugins: [
     peerDepsExternal(),
-    postcss({ extract: true, plugins: [autoprefixer] }),
+    // postcss({ extract: true, plugins: [autoprefixer] }),
     less({
       output: './build/index.css',
     }),
