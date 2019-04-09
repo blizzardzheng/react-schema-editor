@@ -8,7 +8,7 @@ import JSON5 from 'json5';
 import stringToPath from './utils/stringToPath';
 import BulkEditor from './BulkEditor.jsx';
 import './utils/codemirror-json-lint';
-// import './SchemaEditor.less';
+import './SchemaEditor.less';
 // CodeMirror packages
 require('codemirror/mode/javascript/javascript');
 require('codemirror/lib/codemirror.css');
@@ -353,8 +353,8 @@ class SchemaEditor extends React.Component {
                         </Tooltip>
                       </td> : <td />
                     }
-                    {useRequired && item.type ? <td>
-                      {
+                    {
+                      useRequired && item.type ? <td>
                         <Select
                           style={{ width: '100%' }}
                           placeholder="是否必填"
@@ -365,8 +365,8 @@ class SchemaEditor extends React.Component {
                           <Select.Option key="true" value>是</Select.Option>
                           <Select.Option key="false" value={false}>否</Select.Option>
                         </Select>
-                      }
-                    </td> : <td />}
+                      </td> : null
+                    }
                     {
                       item.type ? <td>
                         <input className="re-input" type="text" value={item.title} data-line={idx + 1} onFocus={this.handleSyncTableHightlight} onChange={e => { this.blurFx(item, e.target.value, 'title'); }} />
